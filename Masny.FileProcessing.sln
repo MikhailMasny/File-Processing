@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessing.UI", "FilePr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessing.BL", "FileProcessing.BL\FileProcessing.BL.csproj", "{E288AE20-AF70-47F0-88FD-16022481B409}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessing.Tests", "FileProcessing.Tests\FileProcessing.Tests.csproj", "{911F8E05-F189-492F-863F-9B7726ABA04F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E288AE20-AF70-47F0-88FD-16022481B409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E288AE20-AF70-47F0-88FD-16022481B409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E288AE20-AF70-47F0-88FD-16022481B409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911F8E05-F189-492F-863F-9B7726ABA04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911F8E05-F189-492F-863F-9B7726ABA04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911F8E05-F189-492F-863F-9B7726ABA04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911F8E05-F189-492F-863F-9B7726ABA04F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
