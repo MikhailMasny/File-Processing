@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessing.UI", "FileProcessing.UI\FileProcessing.UI.csproj", "{10CC50F6-C4ED-479C-9DAA-F86447015E12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessing.BL", "FileProcessing.BL\FileProcessing.BL.csproj", "{E288AE20-AF70-47F0-88FD-16022481B409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{10CC50F6-C4ED-479C-9DAA-F86447015E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CC50F6-C4ED-479C-9DAA-F86447015E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10CC50F6-C4ED-479C-9DAA-F86447015E12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E288AE20-AF70-47F0-88FD-16022481B409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E288AE20-AF70-47F0-88FD-16022481B409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E288AE20-AF70-47F0-88FD-16022481B409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E288AE20-AF70-47F0-88FD-16022481B409}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
