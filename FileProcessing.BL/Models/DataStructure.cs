@@ -6,7 +6,7 @@ namespace FileProcessing.BL.Models
     /// <summary>
     /// Структура данных.
     /// </summary>
-    class DataStructure
+    public class DataStructure
     {
         /// <summary>
         /// Режим получения данных.

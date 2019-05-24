@@ -1,12 +1,17 @@
 ﻿using System;
 using System.IO;
+using FileProcessing.BL.Models;
 
 namespace FileProcessing.UI
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
+            var DataStructure = new DataStructure();
+
             try
             {
                 if (args == null)
