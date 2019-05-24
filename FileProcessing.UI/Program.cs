@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FileProcessing.BL;
 using FileProcessing.BL.Models;
 
 namespace FileProcessing.UI
@@ -26,19 +27,19 @@ namespace FileProcessing.UI
                 {
                     switch (args[0])
                     {
-                        case "filesystem":
+                        case Constants.filesystemValue:
                             {
                                 // TODO: FileSystem(args);
                             }
                             break;
 
-                        case "http":
+                        case Constants.httpValue:
                             {
                                 // TODO: Http(args);
                             }
                             break;
 
-                        case "-help":
+                        case Constants.helpValue:
                             {
                                 HelpInformation();
                             }

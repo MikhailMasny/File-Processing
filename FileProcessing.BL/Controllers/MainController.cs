@@ -41,8 +41,8 @@ namespace FileProcessing.BL.Controllers
 
             switch(_dataStructure.Input_mode)
             {
-                case "filesystem": { } break;
-                case "http": { } break;
+                case Constants.filesystemValue: { } break;
+                case Constants.httpValue: { } break;
                 default: { } break;
             }
 

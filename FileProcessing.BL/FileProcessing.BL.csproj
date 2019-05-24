@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\DataStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
