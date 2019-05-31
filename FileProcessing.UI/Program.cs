@@ -7,8 +7,6 @@ namespace FileProcessing.UI
 {
     class Program
     {
-        
-
         static void Main(string[] args)
         {
             var DataStructure = new DataStructure();

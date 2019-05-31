@@ -1,9 +1,5 @@
 ﻿using FileProcessing.BL.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileProcessing.BL.Controllers
 {
@@ -13,7 +9,6 @@ namespace FileProcessing.BL.Controllers
     public class MainController
     {
         private DataStructure _dataStructure;
-
 
         /// <summary>
         /// Пустой конструктор.
