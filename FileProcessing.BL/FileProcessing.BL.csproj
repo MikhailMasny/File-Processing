@@ -42,13 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\Implementations\FileSystemController.cs" />
+    <Compile Include="Controllers\Implementations\HttpController.cs" />
     <Compile Include="Controllers\Interfaces\IDataProcessing.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\DataStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Implementations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

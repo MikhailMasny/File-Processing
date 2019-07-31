@@ -5,6 +5,11 @@ namespace FileProcessing.BL.Controllers.Interfaces
     interface IDataProcessing
     {
         /// <summary>
+        /// Обработка указанного пути.
+        /// </summary>
+        Task ProcessingSpecifiedPath();
+
+        /// <summary>
         /// Получить список файлов для считывания данных.
         /// </summary>
         Task GetListOfFiles();
