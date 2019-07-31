@@ -8,7 +8,7 @@ namespace FileProcessing.BL.Controllers
     /// </summary>
     public class MainController
     {
-        private DataStructure _dataStructure;
+        private readonly DataStructure _dataStructure;
 
         /// <summary>
         /// Пустой конструктор.
@@ -18,6 +18,8 @@ namespace FileProcessing.BL.Controllers
         /// <summary>
         /// Конструктор с параметрами.
         /// </summary>
+        /// <param name="dataStructure">основные данные.</param>
+        /// <param name="args">аргументы.</param>
         public MainController(DataStructure dataStructure, string[] args)
         {
             _dataStructure = dataStructure;
