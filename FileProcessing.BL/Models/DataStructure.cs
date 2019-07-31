@@ -18,8 +18,13 @@ namespace FileProcessing.BL.Models
         public string Input_address { get; set; }
 
         /// <summary>
-        /// Список входных данных файла.
+        /// Список файлов для чтения.
         /// </summary>
-        public ICollection<string> ListInputData = new List<string>();
+        public ICollection<string> ListOfFiles;
+
+        /// <summary>
+        /// Список считанных данных из файлов.
+        /// </summary>
+        public ICollection<string> ListOfInputData;
     }
 }
