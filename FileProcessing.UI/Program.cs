@@ -35,7 +35,8 @@ namespace FileProcessing.UI
 
                         case Constants.httpValue:
                             {
-                                // TODO: Http(args);
+                                dataProcessing = new HttpController(args[0], args[1]);
+                                dataProcessing.StartProcessing();
                             }
                             break;
 
