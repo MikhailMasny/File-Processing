@@ -3,7 +3,6 @@ using System.IO;
 using FileProcessing.BL;
 using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
-using FileProcessing.BL.Models;
 
 namespace FileProcessing.UI
 {

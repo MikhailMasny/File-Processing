@@ -23,9 +23,11 @@ namespace FileProcessing.BL.Controllers.Implementations
         /// <param name="dataStructure">экзепляр класса.</param>
         public FileSystemController(string mode, string path)
         {
-            _dataStructure = new DataStructure();
-            _dataStructure.Input_mode = mode;
-            _dataStructure.Input_address = path;
+            _dataStructure = new DataStructure
+            {
+                Input_mode = mode,
+                Input_address = path
+            };
 
             _operationsWithFiles = new OperationsWithFiles(_dataStructure);
         }
