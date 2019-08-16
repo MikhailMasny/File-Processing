@@ -20,11 +20,16 @@ namespace FileProcessing.BL.Models
         /// <summary>
         /// Список файлов для чтения.
         /// </summary>
-        public ICollection<string> ListOfFiles;
+        public ICollection<string> ListOfFiles = new List<string>();
 
         /// <summary>
         /// Список считанных данных из файлов.
         /// </summary>
-        public ICollection<string> ListOfInputData;
+        public ICollection<string> ListOfInputData = new List<string>();
+
+        /// <summary>
+        /// Обработанные данные.
+        /// </summary>
+        public IDictionary<string, int> ListOfProcessedData = new Dictionary<string, int>();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using FileProcessing.BL;
+using FileProcessing.BL.Controllers.Implementations;
+using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
 
 namespace FileProcessing.UI
@@ -9,7 +11,7 @@ namespace FileProcessing.UI
     {
         static void Main(string[] args)
         {
-            var DataStructure = new DataStructure();
+            var dataStructure = new DataStructure(); 
 
             try
             {
@@ -27,7 +29,14 @@ namespace FileProcessing.UI
                     {
                         case Constants.filesystemValue:
                             {
-                                // TODO: FileSystem(args);
+                                dataStructure.Input_mode = Constants.filesystemValue;
+                                dataStructure.Input_address = @"C:\Users\Mike\Desktop\Tests";
+
+                                IDataProcessing dataProcessing = new FileSystemController(dataStructure);
+                                dataProcessing.GetListOfFiles();
+                                dataProcessing.GetListOfInputData();
+                                dataProcessing.ProcessInputData();
+                                dataProcessing.WriteDataToFile();
                             }
                             break;
 

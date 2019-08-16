@@ -19,5 +19,10 @@
         /// Выбор параметра - помощь по параметрам.
         /// </summary>
         public const string helpValue = "-help";
+
+        /// <summary>
+        /// Название выходного файла.
+        /// </summary>
+        public const string output = "output.txt";
     }
 }

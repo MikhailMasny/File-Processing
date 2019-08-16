@@ -25,7 +25,7 @@ namespace FileProcessing.BL.Controllers
             _dataStructure = dataStructure;
             _dataStructure.Input_mode = args[0];
             _dataStructure.Input_address = args[1];
-            _dataStructure.ListInputData = SeparationArgs();
+            //_dataStructure.ListInputData = SeparationArgs();
         }
 
         /// <summary>

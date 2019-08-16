@@ -2,7 +2,7 @@
 
 namespace FileProcessing.BL.Controllers.Interfaces
 {
-    interface IDataProcessing
+    public interface IDataProcessing
     {
         /// <summary>
         /// Обработка указанного пути.
