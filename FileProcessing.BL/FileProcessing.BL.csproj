@@ -47,6 +47,7 @@
     <Compile Include="Controllers\Interfaces\IDataProcessing.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Models\DataStructure.cs" />
+    <Compile Include="OperationsWithFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
