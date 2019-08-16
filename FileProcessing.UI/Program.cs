@@ -30,11 +30,17 @@ namespace FileProcessing.UI
                         case Constants.filesystemValue:
                             {
                                 dataStructure.Input_mode = Constants.filesystemValue;
-                                dataStructure.Input_address = @"C:\Users\Mike\Desktop\Tests";
 
                                 IDataProcessing dataProcessing = new FileSystemController(dataStructure);
-                                dataProcessing.GetListOfFiles();
+
+                                var isPathExist = dataProcessing.CheckForSpecifiedPath(args[1]);
+
+                                var isFilesExist = dataProcessing.GetListOfFiles();
+
                                 dataProcessing.GetListOfInputData();
+
+
+
                                 dataProcessing.ProcessInputData();
                                 dataProcessing.WriteDataToFile();
                             }

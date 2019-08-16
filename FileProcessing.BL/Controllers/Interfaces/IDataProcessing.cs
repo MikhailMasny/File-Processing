@@ -12,21 +12,29 @@ namespace FileProcessing.BL.Controllers.Interfaces
         /// <summary>
         /// Получить список файлов для считывания данных.
         /// </summary>
-        Task GetListOfFiles();
+        /// <returns>Результат операции.</returns>
+        bool GetListOfFiles();
 
         /// <summary>
         /// Получить данные со всех выбранных файлов.
         /// </summary>
-        Task GetListOfInputData();
+        void GetListOfInputData();
 
         /// <summary>
         /// Обработать считанные данные.
         /// </summary>
-        Task ProcessInputData();
+        bool ProcessInputData();
 
         /// <summary>
         /// Записать результат в файл output.txt
         /// </summary>
-        Task WriteDataToFile();
+        /// <returns>Результат операции.</returns>
+        bool WriteDataToFile();
+
+        /// <summary>
+        /// Проверить наличие указанного пути.
+        /// </summary>
+        /// <returns>Результат операции.</returns>
+        bool CheckForSpecifiedPath(string path);
     }
 }
