@@ -11,7 +11,7 @@ namespace FileProcessing.UI
     {
         static void Main(string[] args)
         {
-            var dataStructure = new DataStructure(); 
+            IDataProcessing dataProcessing;
 
             try
             {
@@ -29,20 +29,8 @@ namespace FileProcessing.UI
                     {
                         case Constants.filesystemValue:
                             {
-                                dataStructure.Input_mode = Constants.filesystemValue;
-
-                                IDataProcessing dataProcessing = new FileSystemController(dataStructure);
-
-                                var isPathExist = dataProcessing.CheckForSpecifiedPath(args[1]);
-
-                                var isFilesExist = dataProcessing.GetListOfFiles();
-
-                                dataProcessing.GetListOfInputData();
-
-
-
-                                dataProcessing.ProcessInputData();
-                                dataProcessing.WriteDataToFile();
+                                dataProcessing = new FileSystemController(args[0], args[1]);
+                                dataProcessing.StartProcessing();
                             }
                             break;
 

@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+// TODO: добавить параллельность.
+
 namespace FileProcessing.BL
 {
     /// <summary>
