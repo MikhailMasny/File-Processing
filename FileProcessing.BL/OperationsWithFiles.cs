@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 // TODO: добавить параллельность.
+// TODO: сделать данный класс абстрактным.
 
 namespace FileProcessing.BL
 {
