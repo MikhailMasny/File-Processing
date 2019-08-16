@@ -1,10 +1,11 @@
 ﻿using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
+using System;
 
 namespace FileProcessing.BL.Controllers.Implementations
 {
     /// <summary>
-    /// 
+    /// Контроллер для обработки всех файлов содержащихся по указанной директории.
     /// </summary>
     public class FileSystemController : IDataProcessing
     {
@@ -26,13 +27,22 @@ namespace FileProcessing.BL.Controllers.Implementations
             _dataStructure.Input_mode = mode;
             _dataStructure.Input_address = path;
 
-            _operationsWithFiles = new OperationsWithFiles();
+            _operationsWithFiles = new OperationsWithFiles(_dataStructure);
         }
 
         /// <inheritdoc/>
         public void StartProcessing()
         {
+            var isSuccessfullyCompleted = _operationsWithFiles.Start();
 
+            if (isSuccessfullyCompleted)
+            {
+                Console.WriteLine("OK!");
+            }
+            else
+            {
+                Console.WriteLine("NOT OK!");
+            }
         }        
     }
 }

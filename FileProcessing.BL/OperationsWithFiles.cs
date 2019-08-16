@@ -30,10 +30,47 @@ namespace FileProcessing.BL
         }
 
         /// <summary>
+        /// Запуск обработки.
+        /// </summary>
+        /// <returns></returns>
+        public bool Start()
+        {
+            // TODO: Сделать в виде возвращаемого кода.
+
+            var isPathExist = CheckForSpecifiedPath(_dataStructure.Input_address);
+            if (!isPathExist)
+            {
+                return false;
+            }
+
+            var isFilesExists = GetListOfFiles();
+            if (!isFilesExists)
+            {
+                return false;
+            }
+
+            GetListOfInputData();
+
+            var isProcessed = ProcessInputData();
+            if (!isProcessed)
+            {
+                return false;
+            }
+
+            var isWrited = WriteDataToFile();
+            if (!isWrited)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Проверить наличие указанного пути.
         /// </summary>
         /// <returns>Результат операции.</returns>
-        public bool CheckForSpecifiedPath(string path)
+        private bool CheckForSpecifiedPath(string path)
         {
             try
             {
@@ -57,7 +94,7 @@ namespace FileProcessing.BL
         /// Получить список файлов для считывания данных.
         /// </summary>
         /// <returns>Результат операции.</returns>
-        public bool GetListOfFiles()
+        private bool GetListOfFiles()
         {
             string[] allFiles;
 
@@ -87,7 +124,7 @@ namespace FileProcessing.BL
         /// <summary>
         /// Получить данные со всех выбранных файлов.
         /// </summary>
-        public void GetListOfInputData()
+        private void GetListOfInputData()
         {
             foreach (var item in _dataStructure.ListOfFiles)
             {
@@ -105,7 +142,7 @@ namespace FileProcessing.BL
         /// <summary>
         /// Обработать считанные данные.
         /// </summary>
-        public bool ProcessInputData()
+        private bool ProcessInputData()
         {
             foreach (var item in _dataStructure.ListOfInputData)
             {
@@ -142,7 +179,7 @@ namespace FileProcessing.BL
         /// Записать результат в файл output.txt
         /// </summary>
         /// <returns>Результат операции.</returns>
-        public bool WriteDataToFile()
+        private bool WriteDataToFile()
         {
             try
             {

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace FileProcessing.BL.Controllers.Interfaces
+﻿namespace FileProcessing.BL.Controllers.Interfaces
 {
     public interface IDataProcessing
     {
