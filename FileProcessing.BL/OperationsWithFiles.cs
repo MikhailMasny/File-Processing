@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 
 // TODO: добавить параллельность.
-// TODO: сделать данный класс абстрактным.
 
 namespace FileProcessing.BL
 {
     /// <summary>
     /// Класс для основных операций с файлами.
     /// </summary>
-    public class OperationsWithFiles
+    public abstract class OperationsWithFiles
     {
         private readonly DataStructure _dataStructure;
 
@@ -31,56 +30,17 @@ namespace FileProcessing.BL
         }
 
         /// <summary>
-        /// Запуск обработки.
-        /// </summary>
-        /// <returns></returns>
-        public bool Start()
-        {
-            // TODO: Сделать в виде возвращаемого кода.
-
-            var isPathExist = CheckForSpecifiedPath(_dataStructure.Input_address);
-            if (!isPathExist)
-            {
-                return false;
-            }
-
-            var isFilesExists = GetListOfFiles();
-            if (!isFilesExists)
-            {
-                return false;
-            }
-
-            GetListOfInputData();
-
-            var isProcessed = ProcessInputData();
-            if (!isProcessed)
-            {
-                return false;
-            }
-
-            var isWrited = WriteDataToFile();
-            if (!isWrited)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Проверить наличие указанного пути.
         /// </summary>
         /// <returns>Результат операции.</returns>
-        private bool CheckForSpecifiedPath(string path)
+        public virtual bool CheckForSpecifiedPath()
         {
             try
             {
-                if (!Directory.Exists(path))
+                if (!Directory.Exists(_dataStructure.Input_address))
                 {
                     return false;
                 }
-
-                _dataStructure.Input_address = path;
 
                 return true;
             }
@@ -95,7 +55,7 @@ namespace FileProcessing.BL
         /// Получить список файлов для считывания данных.
         /// </summary>
         /// <returns>Результат операции.</returns>
-        private bool GetListOfFiles()
+        public virtual bool GetListOfFiles()
         {
             string[] allFiles;
 
@@ -125,7 +85,7 @@ namespace FileProcessing.BL
         /// <summary>
         /// Получить данные со всех выбранных файлов.
         /// </summary>
-        private void GetListOfInputData()
+        public virtual void GetListOfInputData()
         {
             foreach (var item in _dataStructure.ListOfFiles)
             {
@@ -143,7 +103,8 @@ namespace FileProcessing.BL
         /// <summary>
         /// Обработать считанные данные.
         /// </summary>
-        private bool ProcessInputData()
+        /// <returns>Результат операции.</returns>
+        public virtual bool ProcessInputData()
         {
             foreach (var item in _dataStructure.ListOfInputData)
             {
@@ -180,7 +141,7 @@ namespace FileProcessing.BL
         /// Записать результат в файл output.txt
         /// </summary>
         /// <returns>Результат операции.</returns>
-        private bool WriteDataToFile()
+        public virtual bool WriteDataToFile()
         {
             try
             {

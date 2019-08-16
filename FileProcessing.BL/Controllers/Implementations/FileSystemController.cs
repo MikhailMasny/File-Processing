@@ -7,11 +7,8 @@ namespace FileProcessing.BL.Controllers.Implementations
     /// <summary>
     /// Контроллер для обработки всех файлов содержащихся по указанной директории.
     /// </summary>
-    public class FileSystemController : IDataProcessing
+    public class FileSystemController : OperationsWithFiles, IDataProcessing
     {
-        private readonly DataStructure _dataStructure;
-        private readonly OperationsWithFiles _operationsWithFiles;
-
         /// <summary>
         /// Пустой конструктор.
         /// </summary>
@@ -21,23 +18,38 @@ namespace FileProcessing.BL.Controllers.Implementations
         /// Конструктор с параметрами.
         /// </summary>
         /// <param name="dataStructure">экзепляр класса.</param>
-        public FileSystemController(string mode, string path)
-        {
-            _dataStructure = new DataStructure
-            {
-                Input_mode = mode,
-                Input_address = path
-            };
-
-            _operationsWithFiles = new OperationsWithFiles(_dataStructure);
-        }
+        public FileSystemController(DataStructure dataStructure) : base(dataStructure) { }
 
         /// <inheritdoc/>
         public void StartProcessing()
         {
-            var isSuccessfullyCompleted = _operationsWithFiles.Start();
+            var isPathExist = CheckForSpecifiedPath();
+            if (!isPathExist)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
 
-            if (isSuccessfullyCompleted)
+            var isFilesExists = GetListOfFiles();
+            if (!isFilesExists)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            GetListOfInputData();
+
+            var isProcessed = ProcessInputData();
+            if (!isProcessed)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            var isWrited = WriteDataToFile();
+            if (!isWrited)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            if (isPathExist && isFilesExists && isProcessed && isWrited)
             {
                 Console.WriteLine("OK!");
             }

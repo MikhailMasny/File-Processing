@@ -3,6 +3,7 @@ using System.IO;
 using FileProcessing.BL;
 using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
+using FileProcessing.BL.Models;
 
 namespace FileProcessing.UI
 {
@@ -24,11 +25,18 @@ namespace FileProcessing.UI
                 }
                 if (args.Length == 2)
                 {
+                    var dataStructure = new DataStructure
+                    {
+                        Input_mode = args[0],
+                        Input_address = args[1]
+                    };
+
                     switch (args[0])
                     {
                         case Constants.filesystemValue:
                             {
-                                dataProcessing = new FileSystemController(args[0], args[1]);
+
+                                dataProcessing = new FileSystemController(dataStructure);
                                 dataProcessing.StartProcessing();
                             }
                             break;

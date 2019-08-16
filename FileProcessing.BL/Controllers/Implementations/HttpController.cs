@@ -33,7 +33,7 @@ namespace FileProcessing.BL.Controllers.Implementations
                 Input_address = http_address
             };
 
-            _operationsWithFiles = new OperationsWithFiles(_dataStructure);
+            //_operationsWithFiles = new OperationsWithFiles(_dataStructure);
         }
 
         /// <inheritdoc/>
@@ -46,16 +46,16 @@ namespace FileProcessing.BL.Controllers.Implementations
                 Console.WriteLine("ERROR!");
             }
 
-            var isSuccessfullyCompleted = _operationsWithFiles.Start();
+            //var isSuccessfullyCompleted = _operationsWithFiles.Start();
 
-            if (isSuccessfullyCompleted)
-            {
-                Console.WriteLine("OK!");
-            }
-            else
-            {
-                Console.WriteLine("NOT OK!");
-            }
+            //if (isSuccessfullyCompleted)
+            //{
+            //    Console.WriteLine("OK!");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("NOT OK!");
+            //}
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FileProcessing.BL.Controllers.Implementations
                 StringBuilder sb = new StringBuilder(path + @"\" + tempFolder + @"\" + "file");
                 foreach (var item in addressList)
                 {
-                    HttpDownload(item, sb.ToString(), i);
+                    //HttpDownload(item, sb.ToString(), i);
                     i++;
                 }
 
@@ -127,10 +127,10 @@ namespace FileProcessing.BL.Controllers.Implementations
                 return false;
             }
 
-            if (allFiles.Count() == 0)
-            {
-                return false;
-            }
+            //if (allFiles.Count() == 0)
+            //{
+            //    return false;
+            //}
 
             foreach (var file in allFiles)
             {
