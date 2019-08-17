@@ -1,7 +1,6 @@
 ﻿using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -72,29 +71,7 @@ namespace FileProcessing.BL.Controllers.Implementations
             {
                 Console.WriteLine("NOT OK!");
             }
-
-            //var isFilesExists = GetListOfFiles();
-            //if (!isFilesExists)
-            //{
-            //    Console.WriteLine("ERROR!!!");
-            //}
-
-
-
-
-            //var isSuccessfullyCompleted = _operationsWithFiles.Start();
-
-            //if (isSuccessfullyCompleted)
-            //{
-            //    Console.WriteLine("OK!");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("NOT OK!");
-            //}
         }
-
-        
 
         /// <summary>
         /// Обработка указанного http пути.
@@ -133,10 +110,9 @@ namespace FileProcessing.BL.Controllers.Implementations
             }
         }
 
-
-
-        // Private methods
-
+        /// <summary>
+        /// Получить данные из файла.
+        /// </summary>
         private void ReadFile()
         {
             using (var sr = new StreamReader(_ds.Input_address, Encoding.UTF8))
@@ -150,7 +126,7 @@ namespace FileProcessing.BL.Controllers.Implementations
         }
 
         /// <summary>
-        /// Создать временную папку для загрузки материала с веб-узла.
+        /// Создать новую папку для загрузки материала с веб-узла.
         /// </summary>
         /// <returns>Возвращает название созданной папки.</returns>
         private string CreateFolder(string dt)
@@ -166,9 +142,9 @@ namespace FileProcessing.BL.Controllers.Implementations
         /// <summary>
         /// Загрузка материала с веб-узла.
         /// </summary>
-        /// <param name="url">Веб-узел.</param>
-        /// <param name="tempFolder">Название папки для скачивания.</param>
-        /// <param name="i">Счетчик.</param>
+        /// <param name="url">веб-узел.</param>
+        /// <param name="tempFolder">путь к папке.</param>
+        /// <param name="fileName">название файла.</param>
         private void DownloadFiles(string url, string tempFolder, string fileName)
         {
             using (var client = new WebClient())
@@ -177,76 +153,5 @@ namespace FileProcessing.BL.Controllers.Implementations
                 Console.WriteLine($"File successfully {url} downloaded!");
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ///// <summary>
-        ///// Получить список файлов для считывания данных.
-        ///// </summary>
-        ///// <returns>Результат операции.</returns>
-        //private bool GetListOfFiles()
-        //{
-        //    string[] allFiles;
-
-        //    try
-        //    {
-        //        //allFiles = Directory.GetFiles(_dataStructure.Input_address, "*.*", SearchOption.AllDirectories);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("The process failed: {0}", e.ToString());
-        //        return false;
-        //    }
-
-        //    //if (allFiles.Count() == 0)
-        //    //{
-        //    //    return false;
-        //    //}
-
-        //    //foreach (var file in allFiles)
-        //    //{
-        //    //    //_dataStructure.ListOfFiles.Add(file);
-        //    //}
-
-        //    return true;
-        //}
-
-
-
-        ///// <summary>
-        ///// Чтение загруженного файла для получения коллекции списка адресов с файлами.
-        ///// </summary>
-        ///// <param name="filename">Название файла для чтения.</param>
-        ///// <returns>Возвращения коллекции со списком файлов для загрузки.</returns>
-        //public ICollection<string> HttpFileContent(string filename)
-        //{
-        //    ICollection<string> adrressInFile = new List<string>();
-        //    using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
-        //    {
-        //        while (!sr.EndOfStream)
-        //        {
-        //            string line;
-        //            while ((line = sr.ReadLine()) != null)
-        //            {
-        //                adrressInFile.Add(line);
-        //            }
-        //        }
-        //    }
-
-        //    return adrressInFile;
-        //}
     }
 }

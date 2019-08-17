@@ -5,6 +5,9 @@ using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
 
+// TODO: Вынести константы.
+// TODO: Проработать исключения.
+
 namespace FileProcessing.UI
 {
     class Program
@@ -76,10 +79,7 @@ namespace FileProcessing.UI
             {
                 Console.WriteLine(ex);
             }
-            finally
-            {
-                //Console.ReadLine();
-            }
+            finally { }
         }
 
         /// <summary>
