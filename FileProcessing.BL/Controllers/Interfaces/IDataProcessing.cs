@@ -5,6 +5,6 @@
         /// <summary>
         /// Начать обработку файлов.
         /// </summary>
-        void StartProcessing();
+        bool StartProcessing();
     }
 }

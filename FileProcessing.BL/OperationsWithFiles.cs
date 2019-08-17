@@ -46,7 +46,8 @@ namespace FileProcessing.BL
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                Console.WriteLine(Constants.EXCEPTION_PROCESS_FAILED, e.ToString());
+
                 return false;
             }
         }
@@ -65,7 +66,8 @@ namespace FileProcessing.BL
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                Console.WriteLine(Constants.EXCEPTION_PROCESS_FAILED, e.ToString());
+
                 return false;
             }
 
@@ -94,7 +96,11 @@ namespace FileProcessing.BL
                     while (!sr.EndOfStream)
                     {
                         var line = sr.ReadLine().Trim().ToLower();
-                        _dataStructure.ListOfInputData.Add(line);
+
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            _dataStructure.ListOfInputData.Add(line);
+                        }
                     }
                 }
             }
@@ -124,11 +130,15 @@ namespace FileProcessing.BL
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine($"Невозможно выполнить операцию со строкой: {item}");
+                    Console.WriteLine(Constants.EXCEPTION_OPERATION_ON_STRING + item);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine(Constants.EXCEPTION_OPERATION_ON_STRING + item);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error: {0}", e.ToString());
+                    Console.WriteLine(Constants.EXCEPTION_PROCESS_FAILED, e.ToString());
 
                     return false;
                 }
@@ -153,13 +163,14 @@ namespace FileProcessing.BL
                     }
                 }
 
-                Console.WriteLine("Data successfully saved to the file output.txt!");
+                Console.WriteLine(Constants.DATA_SAVED_TO_FILE);
 
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                Console.WriteLine(Constants.EXCEPTION_PROCESS_FAILED, e.ToString());
+
                 return false;
             }
         }

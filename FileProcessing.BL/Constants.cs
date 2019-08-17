@@ -29,5 +29,20 @@
         /// Максимальное количество аргументов.
         /// </summary>
         public const int maxArgs = 2;
+
+        /// <summary>
+        /// Успешное сохранение в файл.
+        /// </summary>
+        public const string DATA_SAVED_TO_FILE = "Data successfully saved to the file output.txt!";
+
+        /// <summary>
+        /// Невозможно выполнить операцию со строкой.
+        /// </summary>
+        public const string EXCEPTION_OPERATION_ON_STRING = "Unable to perform operation on string: ";
+
+        /// <summary>
+        /// Критическая ошибка работы процесса.
+        /// </summary>
+        public const string EXCEPTION_PROCESS_FAILED = "The process failed: {0}";
     }
 }

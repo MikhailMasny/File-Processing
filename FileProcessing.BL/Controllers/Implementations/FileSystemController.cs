@@ -21,18 +21,18 @@ namespace FileProcessing.BL.Controllers.Implementations
         public FileSystemController(DataStructure dataStructure) : base(dataStructure) { }
 
         /// <inheritdoc/>
-        public void StartProcessing()
+        public bool StartProcessing()
         {
             var isPathExist = CheckForSpecifiedPath();
             if (!isPathExist)
             {
-                Console.WriteLine("ERROR!!!");
+                return false;
             }
 
             var isFilesExists = GetListOfFiles();
             if (!isFilesExists)
             {
-                Console.WriteLine("ERROR!!!");
+                return false;
             }
 
             GetListOfInputData();
@@ -40,22 +40,22 @@ namespace FileProcessing.BL.Controllers.Implementations
             var isProcessed = ProcessInputData();
             if (!isProcessed)
             {
-                Console.WriteLine("ERROR!!!");
+                return false;
             }
 
             var isWrited = WriteDataToFile();
             if (!isWrited)
             {
-                Console.WriteLine("ERROR!!!");
+                return false;
             }
 
             if (isPathExist && isFilesExists && isProcessed && isWrited)
             {
-                Console.WriteLine("OK!");
+                return true;
             }
             else
             {
-                Console.WriteLine("NOT OK!");
+                return false;
             }
         }        
     }

@@ -40,14 +40,14 @@ namespace FileProcessing.UI
                         case Constants.filesystemValue:
                             {
                                 dataProcessing = new FileSystemController(dataStructure);
-                                dataProcessing.StartProcessing();
+                                var result = dataProcessing.StartProcessing();
                             }
                             break;
 
                         case Constants.httpValue:
                             {
                                 dataProcessing = new HttpController(dataStructure);
-                                dataProcessing.StartProcessing();
+                                var result = dataProcessing.StartProcessing();
                             }
                             break;
 
@@ -62,6 +62,8 @@ namespace FileProcessing.UI
                                 throw new ArgumentException($"The first parameter should be '{Constants.filesystemValue}' or '{Constants.httpValue}'. Info: -help.");
                             }
                     }
+
+
                 }
             }
             catch (IndexOutOfRangeException ex)
