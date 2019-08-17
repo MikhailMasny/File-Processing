@@ -10,6 +10,8 @@ namespace FileProcessing.UI
     {
         static void Main(string[] args)
         {
+            Console.Title = "File processing Application v1.0";
+
             IDataProcessing dataProcessing;
 
             try
