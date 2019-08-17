@@ -4,9 +4,6 @@ using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
 
-// TODO: Вынести константы.
-// TODO: Проработать исключения.
-
 namespace FileProcessing.UI
 {
     class Program
@@ -19,12 +16,12 @@ namespace FileProcessing.UI
             {
                 if (args == null)
                 {
-                    throw new IndexOutOfRangeException("The index was outside the bounds of the array! Info: -help.");
+                    throw new IndexOutOfRangeException(Constants.EXCEPTION_INDEX_OUT_OF_RANGE);
                 }
 
                 if (args.Length < Constants.maxArgs)
                 {
-                    throw new IndexOutOfRangeException("The index was outside the bounds of the array! Info: -help.");
+                    throw new IndexOutOfRangeException(Constants.EXCEPTION_INDEX_OUT_OF_RANGE);
                 }
 
                 if (args.Length == Constants.maxArgs)
@@ -35,19 +32,21 @@ namespace FileProcessing.UI
                         Input_address = args[1]
                     };
 
+                    var result = OperationStatus.OPERATION_FAILED;
+
                     switch (args[0])
                     {
                         case Constants.filesystemValue:
                             {
                                 dataProcessing = new FileSystemController(dataStructure);
-                                var result = dataProcessing.StartProcessing();
+                                result = dataProcessing.StartProcessing();
                             }
                             break;
 
                         case Constants.httpValue:
                             {
                                 dataProcessing = new HttpController(dataStructure);
-                                var result = dataProcessing.StartProcessing();
+                                result = dataProcessing.StartProcessing();
                             }
                             break;
 
@@ -59,10 +58,21 @@ namespace FileProcessing.UI
 
                         default:
                             {
-                                throw new ArgumentException($"The first parameter should be '{Constants.filesystemValue}' or '{Constants.httpValue}'. Info: -help.");
+                                throw new ArgumentException(Constants.EXCEPTION_ARGUMENT);
                             }
                     }
 
+                    switch (result)
+                    {
+                        case OperationStatus.OPERATION_FAILED: { } break;
+                        case OperationStatus.OPERATION_SUCCEEDED: { } break;
+                        case OperationStatus.PATH: { Console.WriteLine(Constants.ERROR_PATH); } break;
+                        case OperationStatus.LIST_OF_FILES: { Console.WriteLine(Constants.ERROR_LIST_OF_FILES); } break;
+                        case OperationStatus.LIST_OF_INPUT_DATA: { Console.WriteLine(Constants.ERROR_LIST_OF_INPUT_DATA); } break;
+                        case OperationStatus.PROCESSING_INPUT_DATA: { Console.WriteLine(Constants.ERROR_PROCESSING_INPUT_DATA); } break;
+                        case OperationStatus.WRITE_DATA: { Console.WriteLine(Constants.ERROR_WRITE_DATA); } break;
+                        case OperationStatus.DOWNLOAD_FILES: { Console.WriteLine(Constants.ERROR_DOWNLOAD_FILES); } break;
+                    }
 
                 }
             }

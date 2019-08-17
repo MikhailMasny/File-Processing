@@ -29,24 +29,24 @@ namespace FileProcessing.BL.Controllers.Implementations
         }
 
         /// <inheritdoc/>
-        public bool StartProcessing()
+        public OperationStatus StartProcessing()
         {
             var isDownloaded = ProcessingSpecifiedHttpPath();
             if (!isDownloaded)
             {
-                return false;
+                return OperationStatus.DOWNLOAD_FILES;
             }
 
             var isPathExist = CheckForSpecifiedPath();
             if (!isPathExist)
             {
-                return false;
+                return OperationStatus.PATH;
             }
 
             var isFilesExists = GetListOfFiles();
             if (!isFilesExists)
             {
-                return false;
+                return OperationStatus.LIST_OF_FILES;
             }
 
             GetListOfInputData();
@@ -54,22 +54,22 @@ namespace FileProcessing.BL.Controllers.Implementations
             var isProcessed = ProcessInputData();
             if (!isProcessed)
             {
-                return false;
+                return OperationStatus.PROCESSING_INPUT_DATA;
             }
 
             var isWrited = WriteDataToFile();
             if (!isWrited)
             {
-                return false;
+                return OperationStatus.WRITE_DATA;
             }
 
             if (isPathExist && isFilesExists && isProcessed && isWrited)
             {
-                return true;
+                return OperationStatus.OPERATION_SUCCEEDED;
             }
             else
             {
-                return false;
+                return OperationStatus.OPERATION_FAILED;
             }
         }
 

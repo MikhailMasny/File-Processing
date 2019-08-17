@@ -44,5 +44,45 @@
         /// Критическая ошибка работы процесса.
         /// </summary>
         public const string EXCEPTION_PROCESS_FAILED = "The process failed: {0}";
+
+        /// <summary>
+        /// Ошибка выхода за пределы массива.
+        /// </summary>
+        public const string EXCEPTION_INDEX_OUT_OF_RANGE = "The index was outside the bounds of the array! Info: -help.";
+
+        /// <summary>
+        /// Ошибка аргумента.
+        /// </summary>
+        public const string EXCEPTION_ARGUMENT = "The first parameter should be 'filesystem' or 'http'. Info: -help.";
+
+        /// <summary>
+        /// Ошибка правильности пути.
+        /// </summary>
+        public const string ERROR_PATH = "Error correct path.";
+
+        /// <summary>
+        /// Ошибка получения списка файлов.
+        /// </summary>
+        public const string ERROR_LIST_OF_FILES = "Error getting file list.";
+
+        /// <summary>
+        /// Ошибка получения списка данных из файлов.
+        /// </summary>
+        public const string ERROR_LIST_OF_INPUT_DATA = "Error getting a list of data from files.";
+
+        /// <summary>
+        /// Ошибка обработки данных.
+        /// </summary>
+        public const string ERROR_PROCESSING_INPUT_DATA = "Error processing data.";
+
+        /// <summary>
+        /// Ошибка записи файла.
+        /// </summary>
+        public const string ERROR_WRITE_DATA = "Error writing file.";
+
+        /// <summary>
+        /// Ошибка скачивания файлов по HTTP.
+        /// </summary>
+        public const string ERROR_DOWNLOAD_FILES = "Error downloading files over HTTP.";
     }
 }

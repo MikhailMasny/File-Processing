@@ -5,6 +5,6 @@
         /// <summary>
         /// Начать обработку файлов.
         /// </summary>
-        bool StartProcessing();
+        OperationStatus StartProcessing();
     }
 }

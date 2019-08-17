@@ -45,6 +45,7 @@
     <Compile Include="Controllers\Implementations\FileSystemController.cs" />
     <Compile Include="Controllers\Implementations\HttpController.cs" />
     <Compile Include="Controllers\Interfaces\IDataProcessing.cs" />
+    <Compile Include="OperationStatus.cs" />
     <Compile Include="Models\DataStructure.cs" />
     <Compile Include="OperationsWithFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
