@@ -11,10 +11,9 @@ namespace FileProcessing.BL.Controllers.Implementations
     /// <summary>
     /// Контроллер для скачивания и обработки всех документов указанных в файле.
     /// </summary>
-    public class HttpController : IDataProcessing
+    public class HttpController : OperationsWithFiles, IDataProcessing
     {
-        private readonly DataStructure _dataStructure;
-        private readonly OperationsWithFiles _operationsWithFiles;
+        private readonly DataStructure _ds;
 
         /// <summary>
         /// Пустой конструктор.
@@ -25,26 +24,63 @@ namespace FileProcessing.BL.Controllers.Implementations
         /// Конструктор с параметрами.
         /// </summary>
         /// <param name="dataStructure">экзепляр класса.</param>
-        public HttpController(string mode, string http_address)
+        public HttpController(DataStructure dataStructure) : base(dataStructure)
         {
-            _dataStructure = new DataStructure
-            {
-                Input_mode = mode,
-                Input_address = http_address
-            };
-
-            //_operationsWithFiles = new OperationsWithFiles(_dataStructure);
+            _ds = dataStructure;
         }
 
         /// <inheritdoc/>
         public void StartProcessing()
         {
-            var isCompleted = ProcessingSpecifiedPath();
-
-            if (!isCompleted)
+            var isDownloaded = ProcessingSpecifiedHttpPath();
+            if (!isDownloaded)
             {
-                Console.WriteLine("ERROR!");
+                Console.WriteLine("ERROR!!!");
             }
+
+            var isPathExist = CheckForSpecifiedPath();
+            if (!isPathExist)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            var isFilesExists = GetListOfFiles();
+            if (!isFilesExists)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            GetListOfInputData();
+
+            var isProcessed = ProcessInputData();
+            if (!isProcessed)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            var isWrited = WriteDataToFile();
+            if (!isWrited)
+            {
+                Console.WriteLine("ERROR!!!");
+            }
+
+            if (isPathExist && isFilesExists && isProcessed && isWrited)
+            {
+                Console.WriteLine("OK!");
+            }
+            else
+            {
+                Console.WriteLine("NOT OK!");
+            }
+
+            //var isFilesExists = GetListOfFiles();
+            //if (!isFilesExists)
+            //{
+            //    Console.WriteLine("ERROR!!!");
+            //}
+
+
+
 
             //var isSuccessfullyCompleted = _operationsWithFiles.Start();
 
@@ -58,48 +94,66 @@ namespace FileProcessing.BL.Controllers.Implementations
             //}
         }
 
+        
+
         /// <summary>
         /// Обработка указанного http пути.
         /// </summary>
-        private bool ProcessingSpecifiedPath()
+        private bool ProcessingSpecifiedHttpPath()
         {
             try
             {
+                ReadFile();
+
                 var now = DateTime.Now;
                 var date = now.ToString("yyyyMMdd");
                 var time = now.ToString("hhmmss");
 
                 var tempFolder = CreateFolder(date + time);
-                var path = Directory.GetCurrentDirectory();
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var path = currentDirectory + @"\" + tempFolder;
 
 
-
-
-                DownloadFiles(_dataStructure.Input_address, null, Convert.ToInt32(date));
-                var addressList = HttpFileContent($"{date}.txt");
-
-                int i = 0;
-                StringBuilder sb = new StringBuilder(path + @"\" + tempFolder + @"\" + "file");
-                foreach (var item in addressList)
+                foreach (var item in _ds.ListOfFiles)
                 {
-                    //HttpDownload(item, sb.ToString(), i);
-                    i++;
+                    var fileName = DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                    DownloadFiles(item, path, fileName);
                 }
+
+                _ds.Input_address = path;
+                _ds.ListOfFiles.Clear();
 
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine("The process failed: {0}", e.ToString());
+
                 return false;
             }
         }
 
+
+
+        // Private methods
+
+        private void ReadFile()
+        {
+            using (var sr = new StreamReader(_ds.Input_address, Encoding.UTF8))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Trim().ToLower();
+                    _ds.ListOfFiles.Add(line);
+                }
+            }
+        }
+
         /// <summary>
-        /// Создание временной папки для загрузки материала с веб-узла.
+        /// Создать временную папку для загрузки материала с веб-узла.
         /// </summary>
         /// <returns>Возвращает название созданной папки.</returns>
-        public string CreateFolder(string dt)
+        private string CreateFolder(string dt)
         {
             var tempFolder = "temp_" + dt;
 
@@ -110,72 +164,89 @@ namespace FileProcessing.BL.Controllers.Implementations
         }
 
         /// <summary>
-        /// Получить список файлов для считывания данных.
-        /// </summary>
-        /// <returns>Результат операции.</returns>
-        private bool GetListOfFiles()
-        {
-            string[] allFiles;
-
-            try
-            {
-                allFiles = Directory.GetFiles(_dataStructure.Input_address, "*.*", SearchOption.AllDirectories);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The process failed: {0}", e.ToString());
-                return false;
-            }
-
-            //if (allFiles.Count() == 0)
-            //{
-            //    return false;
-            //}
-
-            foreach (var file in allFiles)
-            {
-                _dataStructure.ListOfFiles.Add(file);
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Загрузка материала с веб-узла.
         /// </summary>
         /// <param name="url">Веб-узел.</param>
         /// <param name="tempFolder">Название папки для скачивания.</param>
         /// <param name="i">Счетчик.</param>
-        private void DownloadFiles(string url, string tempFolder, int i)
+        private void DownloadFiles(string url, string tempFolder, string fileName)
         {
             using (var client = new WebClient())
             {
-                client.DownloadFile(url, $"{tempFolder}{i}.txt");
+                client.DownloadFile(url, $@"{tempFolder}\{fileName}.txt");
                 Console.WriteLine($"File successfully {url} downloaded!");
             }
         }
 
-        /// <summary>
-        /// Чтение загруженного файла для получения коллекции списка адресов с файлами.
-        /// </summary>
-        /// <param name="filename">Название файла для чтения.</param>
-        /// <returns>Возвращения коллекции со списком файлов для загрузки.</returns>
-        public ICollection<string> HttpFileContent(string filename)
-        {
-            ICollection<string> adrressInFile = new List<string>();
-            using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        adrressInFile.Add(line);
-                    }
-                }
-            }
 
-            return adrressInFile;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///// <summary>
+        ///// Получить список файлов для считывания данных.
+        ///// </summary>
+        ///// <returns>Результат операции.</returns>
+        //private bool GetListOfFiles()
+        //{
+        //    string[] allFiles;
+
+        //    try
+        //    {
+        //        //allFiles = Directory.GetFiles(_dataStructure.Input_address, "*.*", SearchOption.AllDirectories);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The process failed: {0}", e.ToString());
+        //        return false;
+        //    }
+
+        //    //if (allFiles.Count() == 0)
+        //    //{
+        //    //    return false;
+        //    //}
+
+        //    //foreach (var file in allFiles)
+        //    //{
+        //    //    //_dataStructure.ListOfFiles.Add(file);
+        //    //}
+
+        //    return true;
+        //}
+
+
+
+        ///// <summary>
+        ///// Чтение загруженного файла для получения коллекции списка адресов с файлами.
+        ///// </summary>
+        ///// <param name="filename">Название файла для чтения.</param>
+        ///// <returns>Возвращения коллекции со списком файлов для загрузки.</returns>
+        //public ICollection<string> HttpFileContent(string filename)
+        //{
+        //    ICollection<string> adrressInFile = new List<string>();
+        //    using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
+        //    {
+        //        while (!sr.EndOfStream)
+        //        {
+        //            string line;
+        //            while ((line = sr.ReadLine()) != null)
+        //            {
+        //                adrressInFile.Add(line);
+        //            }
+        //        }
+        //    }
+
+        //    return adrressInFile;
+        //}
     }
 }

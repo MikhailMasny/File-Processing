@@ -35,7 +35,6 @@ namespace FileProcessing.UI
                     {
                         case Constants.filesystemValue:
                             {
-
                                 dataProcessing = new FileSystemController(dataStructure);
                                 dataProcessing.StartProcessing();
                             }
@@ -43,7 +42,7 @@ namespace FileProcessing.UI
 
                         case Constants.httpValue:
                             {
-                                dataProcessing = new HttpController(args[0], args[1]);
+                                dataProcessing = new HttpController(dataStructure);
                                 dataProcessing.StartProcessing();
                             }
                             break;
