@@ -7,7 +7,7 @@ using FileProcessing.BL.Models;
 namespace FileProcessing.BL.Tests
 {
     [TestClass()]
-    public class FileSystemControllerTests
+    public class UnitTests
     {
         [TestMethod()]
         public void CheckForSpecifiedPathTest()
