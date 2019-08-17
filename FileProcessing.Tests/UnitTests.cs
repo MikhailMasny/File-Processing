@@ -10,7 +10,7 @@ namespace FileProcessing.BL.Tests
     public class UnitTests
     {
         [TestMethod()]
-        public void CheckForSpecifiedPathTest()
+        public void CheckForSpecifiedPathTest_Return_False()
         {
             // Arrange
             var dataStructure = new DataStructure
@@ -27,7 +27,7 @@ namespace FileProcessing.BL.Tests
         }
 
         [TestMethod()]
-        public void GetListOfFilesTest()
+        public void GetListOfFilesTest_Return_False()
         {
             // Arrange
             var dataStructure = new DataStructure
