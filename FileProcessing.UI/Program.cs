@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using FileProcessing.BL;
 using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
@@ -22,11 +21,13 @@ namespace FileProcessing.UI
                 {
                     throw new IndexOutOfRangeException("The index was outside the bounds of the array! Info: -help.");
                 }
-                if (args.Length < 2)
+
+                if (args.Length < Constants.maxArgs)
                 {
                     throw new IndexOutOfRangeException("The index was outside the bounds of the array! Info: -help.");
                 }
-                if (args.Length == 2)
+
+                if (args.Length == Constants.maxArgs)
                 {
                     var dataStructure = new DataStructure
                     {
@@ -58,14 +59,10 @@ namespace FileProcessing.UI
 
                         default:
                             {
-                                throw new ArgumentException("The index was outside the bounds of the array! Info: -help.");
+                                throw new ArgumentException($"The first parameter should be '{Constants.filesystemValue}' or '{Constants.httpValue}'. Info: -help.");
                             }
                     }
                 }
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                Console.WriteLine(ex.Message);
             }
             catch (IndexOutOfRangeException ex)
             {
@@ -79,7 +76,10 @@ namespace FileProcessing.UI
             {
                 Console.WriteLine(ex);
             }
-            finally { }
+            finally
+            {
+                Console.ReadLine();
+            }
         }
 
         /// <summary>

@@ -24,5 +24,10 @@
         /// Название выходного файла.
         /// </summary>
         public const string output = "output.txt";
+
+        /// <summary>
+        /// Максимальное количество аргументов.
+        /// </summary>
+        public const int maxArgs = 2;
     }
 }
