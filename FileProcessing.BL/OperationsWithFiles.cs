@@ -107,6 +107,8 @@ namespace FileProcessing.BL
                     }
                 }
             }
+
+            Console.WriteLine(Constants.FILE_PROCESSED + item);
         }
 
         /// <summary>

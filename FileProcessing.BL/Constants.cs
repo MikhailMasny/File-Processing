@@ -47,7 +47,12 @@ namespace FileProcessing.BL
         /// <summary>
         /// Успешное сохранение в файл.
         /// </summary>
-        public const string DATA_SAVED_TO_FILE = "Data successfully saved to the file output.txt!";
+        public const string DATA_SAVED_TO_FILE = ">> Data successfully saved to the file output.txt!";
+
+        /// <summary>
+        /// Успешная обработка файл.
+        /// </summary>
+        public const string FILE_PROCESSED = "> File processed successfully: ";
 
         /// <summary>
         /// Невозможно выполнить операцию со строкой.
