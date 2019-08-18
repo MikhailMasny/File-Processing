@@ -2,8 +2,10 @@
 using FileProcessing.BL.Models;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FileProcessing.BL.Controllers.Implementations
 {
@@ -49,7 +51,15 @@ namespace FileProcessing.BL.Controllers.Implementations
                 return OperationStatus.LIST_OF_FILES;
             }
 
-            GetListOfInputData();
+            var items = _ds.ListOfFiles.ToArray();
+
+            Parallel.For(0, items.Length, new ParallelOptions
+            {
+                MaxDegreeOfParallelism = 3
+            }, (i, state) =>
+            {
+                GetListOfInputData(items[i]);
+            });
 
             var isProcessed = ProcessInputData();
             if (!isProcessed)

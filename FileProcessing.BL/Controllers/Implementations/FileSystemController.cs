@@ -1,5 +1,7 @@
 ﻿using FileProcessing.BL.Controllers.Interfaces;
 using FileProcessing.BL.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FileProcessing.BL.Controllers.Implementations
 {
@@ -8,6 +10,8 @@ namespace FileProcessing.BL.Controllers.Implementations
     /// </summary>
     public class FileSystemController : OperationsWithFiles, IDataProcessing
     {
+        private readonly DataStructure _ds;
+
         /// <summary>
         /// Пустой конструктор.
         /// </summary>
@@ -17,7 +21,10 @@ namespace FileProcessing.BL.Controllers.Implementations
         /// Конструктор с параметрами.
         /// </summary>
         /// <param name="dataStructure">экзепляр класса.</param>
-        public FileSystemController(DataStructure dataStructure) : base(dataStructure) { }
+        public FileSystemController(DataStructure dataStructure) : base(dataStructure)
+        {
+            _ds = dataStructure;
+        }
 
         /// <inheritdoc/>
         public OperationStatus StartProcessing()
@@ -34,7 +41,15 @@ namespace FileProcessing.BL.Controllers.Implementations
                 return OperationStatus.LIST_OF_FILES;
             }
 
-            GetListOfInputData();
+            var items = _ds.ListOfFiles.ToArray();      
+
+            Parallel.For(0, items.Length, new ParallelOptions
+            {
+                MaxDegreeOfParallelism = 2
+            }, (i, state) =>
+            {
+                GetListOfInputData(items[i]);
+            });
 
             var isProcessed = ProcessInputData();
             if (!isProcessed)

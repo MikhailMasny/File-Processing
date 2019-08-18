@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-// TODO: добавить параллельность.
-
 namespace FileProcessing.BL
 {
     /// <summary>
@@ -14,6 +12,11 @@ namespace FileProcessing.BL
     public abstract class OperationsWithFiles
     {
         private readonly DataStructure _dataStructure;
+
+        /// <summary>
+        /// Блокировка заданного объекта.
+        /// </summary>
+        static readonly object locker = new object();
 
         /// <summary>
         /// Пустой конструктор.
@@ -87,16 +90,16 @@ namespace FileProcessing.BL
         /// <summary>
         /// Получить данные со всех выбранных файлов.
         /// </summary>
-        public virtual void GetListOfInputData()
+        public virtual void GetListOfInputData(string item)
         {
-            foreach (var item in _dataStructure.ListOfFiles)
+            using (var sr = new StreamReader(item, Encoding.UTF8))
             {
-                using (var sr = new StreamReader(item, Encoding.UTF8))
+                while (!sr.EndOfStream)
                 {
-                    while (!sr.EndOfStream)
-                    {
-                        var line = sr.ReadLine().Trim().ToLower();
+                    var line = sr.ReadLine().Trim().ToLower();
 
+                    lock (locker)
+                    {
                         if (!string.IsNullOrWhiteSpace(line))
                         {
                             _dataStructure.ListOfInputData.Add(line);
