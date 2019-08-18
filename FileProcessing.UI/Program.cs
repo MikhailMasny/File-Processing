@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FileProcessing.BL;
 using FileProcessing.BL.Controllers.Implementations;
 using FileProcessing.BL.Controllers.Interfaces;
@@ -28,13 +29,18 @@ namespace FileProcessing.UI
 
                 if (args.Length == Constants.maxArgs)
                 {
+                    var result = OperationStatus.OPERATION_FAILED;
+
+                    if (Constants.count_parallel <= 0)
+                    {
+                        throw new ArgumentException(Constants.EXCEPTION_ARGUMENT_PARALLEL);
+                    }
+
                     var dataStructure = new DataStructure
                     {
                         Input_mode = args[0],
                         Input_address = args[1]
                     };
-
-                    var result = OperationStatus.OPERATION_FAILED;
 
                     switch (args[0])
                     {
@@ -60,7 +66,7 @@ namespace FileProcessing.UI
 
                         default:
                             {
-                                throw new ArgumentException(Constants.EXCEPTION_ARGUMENT);
+                                throw new ArgumentException(Constants.EXCEPTION_ARGUMENT_COMMON);
                             }
                     }
 
@@ -77,6 +83,14 @@ namespace FileProcessing.UI
                     }
 
                 }
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             catch (IndexOutOfRangeException ex)
             {

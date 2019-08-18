@@ -45,7 +45,7 @@ namespace FileProcessing.BL.Controllers.Implementations
 
             Parallel.For(0, items.Length, new ParallelOptions
             {
-                MaxDegreeOfParallelism = 2
+                MaxDegreeOfParallelism = Constants.count_parallel
             }, (i, state) =>
             {
                 GetListOfInputData(items[i]);

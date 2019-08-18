@@ -1,10 +1,19 @@
-﻿namespace FileProcessing.BL
+﻿using System;
+using System.IO;
+using System.Text;
+
+namespace FileProcessing.BL
 {
     /// <summary>
     /// Основные константы проекта.
     /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// Конфигурация количества файлов для одновременной параллельной обработки.
+        /// </summary>
+        public static readonly int count_parallel = Convert.ToInt32(File.ReadAllText(config, Encoding.Default));
+
         /// <summary>
         /// Выбор параметра - файловая система.
         /// </summary>
@@ -24,6 +33,11 @@
         /// Название выходного файла.
         /// </summary>
         public const string output = "output.txt";
+
+        /// <summary>
+        /// Название конфигурационного файла.
+        /// </summary>
+        public const string config = "config.ini";
 
         /// <summary>
         /// Максимальное количество аргументов.
@@ -51,9 +65,14 @@
         public const string EXCEPTION_INDEX_OUT_OF_RANGE = "The index was outside the bounds of the array! Info: -help.";
 
         /// <summary>
-        /// Ошибка аргумента.
+        /// Ошибка аргумента (общая).
         /// </summary>
-        public const string EXCEPTION_ARGUMENT = "The first parameter should be 'filesystem' or 'http'. Info: -help.";
+        public const string EXCEPTION_ARGUMENT_COMMON = "The first parameter should be 'filesystem' or 'http'. Info: -help.";
+
+        /// <summary>
+        /// Ошибка аргумента (Count parallel).
+        /// </summary>
+        public const string EXCEPTION_ARGUMENT_PARALLEL = "The value does not fall within the expected range.";
 
         /// <summary>
         /// Ошибка правильности пути.
