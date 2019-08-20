@@ -63,14 +63,7 @@ namespace FileProcessing.BL.Controllers.Implementations
                 return OperationStatus.WRITE_DATA;
             }
 
-            if (isPathExist && isFilesExists && isProcessed && isWrited)
-            {
-                return OperationStatus.OPERATION_SUCCEEDED;
-            }
-            else
-            {
-                return OperationStatus.OPERATION_FAILED;
-            }
+            return OperationStatus.OPERATION_SUCCEEDED;
         }        
     }
 }
