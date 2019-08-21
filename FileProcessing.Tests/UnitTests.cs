@@ -6,9 +6,15 @@ using FileProcessing.BL.Models;
 
 namespace FileProcessing.BL.Tests
 {
+    /// <summary>
+    /// Класс Unit тестов для OperationsWithFiles.
+    /// </summary>
     [TestClass()]
     public class UnitTests
     {
+        /// <summary>
+        /// Тест на проверку существования пути.
+        /// </summary>
         [TestMethod()]
         public void CheckForSpecifiedPathTest_Return_False()
         {
@@ -26,6 +32,9 @@ namespace FileProcessing.BL.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Тест на проверку получения списка файлов.
+        /// </summary>
         [TestMethod()]
         public void GetListOfFilesTest_Return_False()
         {
@@ -43,6 +52,9 @@ namespace FileProcessing.BL.Tests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Тест на проверку обработки данных.
+        /// </summary>
         [TestMethod()]
         public void ProcessInputDataTest_Return_True()
         {
@@ -67,6 +79,9 @@ namespace FileProcessing.BL.Tests
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// Тест на проверки записи данных в файл.
+        /// </summary>
         [TestMethod()]
         public void WriteDataToFileTest_Return_True()
         {
